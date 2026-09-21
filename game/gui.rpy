@@ -25,51 +25,70 @@ define config.check_conflicting_properties = True
 ##
 ## Los colores del texto de la interfaz
 
+## Aethernia: paleta dorada (antes era el rosa por defecto, #cc0066).
+## Ojo: estos colores solo afectan al TEXTO. Las imágenes de game/gui/ (barras,
+## sliders, botones) se recolorearon aparte con herramientas/recolorear_gui.py.
+
 ## El color enfatizado usado en la interfaz para subrayar texto.
-define gui.accent_color = '#cc0066'
+define gui.accent_color = '#c9a45c'
 
 ## El color del botón de texto cuando no está seleccionado ni enfocado.
-define gui.idle_color = '#888888'
+define gui.idle_color = '#8c8474'
 
 ## El color 'small' se usa para el texto pequeño, que necesita destacar más.
-define gui.idle_small_color = '#aaaaaa'
+define gui.idle_small_color = '#aaa293'
 
 ## El color usado en botones y barras que ganan foco.
-define gui.hover_color = '#e066a3'
+define gui.hover_color = '#f0d38a'
 
 ## El color del botón de texto seleccionado pero no enfocado. Un botón está
 ## seleccionado si indica el valor actual de la pantalla o preferencia.
 define gui.selected_color = '#ffffff'
 
 ## El color de los botones de texto que no pueden ser seleccionados.
-define gui.insensitive_color = '#8888887f'
+define gui.insensitive_color = '#8c84747f'
 
 ## Colores de la parte vacía de las barras. No se usan directamente, sino en la
 ## regeneración de las imágenes de barra.
-define gui.muted_color = '#510028'
-define gui.hover_muted_color = '#7a003d'
+define gui.muted_color = '#3a2f1a'
+define gui.hover_muted_color = '#5a4a28'
 
 ## Colores del texto del diálogo y menú.
-define gui.text_color = '#ffffff'
-define gui.interface_text_color = '#ffffff'
+## Aethernia: blanco cálido tipo pergamino; el blanco puro cansa más la vista.
+define gui.text_color = '#f2ead8'
+define gui.interface_text_color = '#f2ead8'
 
 
 ## Tipos y tamaños de letra ####################################################
 
+## Aethernia: tipografías libres (licencia OFL, ver game/fonts/).
+##   EB Garamond -> diálogo: serif clásica de libro, cómoda para leer mucho.
+##   Cinzel      -> nombres e interfaz: mayúsculas de inspiración romana, épicas.
+
 ## El tipo de letra del texto del juego
-define gui.text_font = "DejaVuSans.ttf"
+define gui.text_font = "fonts/EBGaramond-Regular.ttf"
 
 ## El tipo de letra de los nombres de personajes
-define gui.name_text_font = "DejaVuSans.ttf"
+define gui.name_text_font = "fonts/Cinzel-Bold.ttf"
 
 ## El tipo de letra del texto externo al juego.
-define gui.interface_text_font = "DejaVuSans.ttf"
+define gui.interface_text_font = "fonts/Cinzel-Regular.ttf"
+
+## Aethernia: cuando el texto pide {i}cursiva{/i} o {b}negrita{/b}, Ren'Py
+## "inventa" una inclinando o engrosando la letra normal (queda feo). Con este
+## mapa usa los archivos reales de cursiva y negrita de la fuente.
+init python:
+    config.font_replacement_map["fonts/EBGaramond-Regular.ttf", False, True] = ("fonts/EBGaramond-Italic.ttf", False, False)
+    config.font_replacement_map["fonts/EBGaramond-Regular.ttf", True, False] = ("fonts/EBGaramond-Bold.ttf", False, False)
+    config.font_replacement_map["fonts/Cinzel-Regular.ttf", True, False] = ("fonts/Cinzel-Bold.ttf", False, False)
 
 ## El tamaño normal del texto del diálogo.
-define gui.text_size = 33
+## Aethernia: Garamond tiene letras más pequeñas que DejaVu; subimos un poco.
+define gui.text_size = 37
 
 ## El tamaño de los nombres de los personajes
-define gui.name_text_size = 45
+## Aethernia: Cinzel es ancha; un poco más chica queda más elegante.
+define gui.name_text_size = 40
 
 ## El tamaño del texto en la interfaz.
 define gui.interface_text_size = 33
@@ -87,8 +106,11 @@ define gui.title_text_size = 75
 ## Menú principal y menús del juego ############################################
 
 ## Imágenes del menú principal y menús del juego.
-define gui.main_menu_background = "gui/main_menu.png"
-define gui.game_menu_background = "gui/game_menu.png"
+## Aethernia: usamos imágenes definidas en definiciones/imagenes.rpy.
+## (Un texto SIN punto se interpreta como nombre de imagen; con punto, como
+## archivo: "gui/main_menu.png".)
+define gui.main_menu_background = "fondo_menu_principal"
+define gui.game_menu_background = "fondo_menu_juego"
 
 
 ## Diálogo #####################################################################

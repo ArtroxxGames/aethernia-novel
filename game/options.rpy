@@ -30,7 +30,20 @@ define config.version = "0.0.1"
 ## Texto situado en la pantalla 'Acerca de' del juego. Sitúa el texto entre
 ## comillas triples y deja una línea en blanco entre párrafos.
 
+## Aethernia: aquí van los CRÉDITOS de los recursos de terceros. Las licencias
+## CC-BY OBLIGAN a mostrar la atribución dentro del juego; las CC0 no, pero
+## dar crédito es buena práctica. Lista completa y enlaces: CREDITOS.md.
+
 define gui.about = _p("""
+{b}Tipografías{/b} (SIL Open Font License 1.1)
+Cinzel, de Natanael Gama. EB Garamond, de Georg Duffner.
+
+{b}Música{/b} (CC0)
+"Ominous", de poinl. "Battle RPG Theme (Var)", de Cleyton Kauffman.
+
+{b}Efectos de sonido{/b}
+"Shredder 2012 inspired armor footstep", de Artninja, basado en "boots on floor" de mtws (CC-BY 4.0): freesound.org/s/705490
+"Howling Wind Ambience", de DBlover; "Fire crackling loop", de soundofsong; "Door knock (Urgent)", de Terry93D; "Eerie Shimmer", de be-steele; "Thunder rumble (loop)", de xUMR; "RPG Audio", de Kenney (todos CC0).
 """)
 
 
@@ -62,6 +75,7 @@ define config.has_voice = True
 ## el menú principal. Este archivo seguirá sonando en el juego hasta que sea
 ## detenido o se reproduzca otro archivo.
 
+## Aethernia: definida en definiciones/audio.rpy, junto al resto del audio.
 # define config.main_menu_music = "main-menu-theme.ogg"
 
 
@@ -84,12 +98,12 @@ define config.intra_transition = dissolve
 
 ## Transición tras la carga de una partida.
 
-define config.after_load_transition = None
+define config.after_load_transition = dissolve
 
 
 ## Transición de acceso al menú principal tras finalizar el juego.
 
-define config.end_game_transition = None
+define config.end_game_transition = Dissolve(1.5)
 
 
 ## No existe la variable que ajusta la transición cuando el juego comienza. Para
@@ -121,7 +135,13 @@ define config.window_hide_transition = Dissolve(.2)
 ## infinito; cualquier otro número indica el número de caracteres por segundo
 ## que se mostrarán.
 
-default preferences.text_cps = 0
+## Aethernia: 45 caracteres por segundo (efecto "máquina de escribir"). Así
+## las pausas {w} del guion marcan el ritmo. El jugador puede cambiarlo.
+## OJO: las preferencias se guardan al primer arranque. Si ya abriste el
+## juego antes, este valor no se aplica hasta que borres los datos
+## persistentes (Launcher -> Acciones -> "Eliminar datos persistentes").
+
+default preferences.text_cps = 45
 
 
 ## El retraso por defecto del auto-avance. Números más grandes indican esperas
@@ -187,6 +207,11 @@ init python:
     build.classify('**/.**', None)
     build.classify('**/#**', None)
     build.classify('**/thumbs.db', None)
+
+    ## Aethernia: material de trabajo que no debe viajar con el juego.
+    build.classify('docs/**', None)
+    build.classify('herramientas/**', None)
+    build.classify('**.md', None)
 
     ## Para archivar, se clasifican como 'archive'.
 

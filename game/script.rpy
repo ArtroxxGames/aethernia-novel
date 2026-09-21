@@ -1,54 +1,43 @@
-﻿# Coloca el código de tu juego en este archivo.
-
-# Declara los personajes usados en el juego como en el ejemplo:
-
-define e = Character("Ailen")
-define rey = Character("Rey Leofric Eldric")
-define narrador_vacio = Character("")
-
-
-image noche_estrellada_1 = Transform(
-    "images/noche_estrellada_1.jpg",
-    xysize=(1920, 1080)
-)
-
-# El juego comienza aquí.
+## =============================================================================
+## PUNTO DE ENTRADA DEL JUEGO
+## =============================================================================
+## Ren'Py siempre empieza en `label start`. Úsalo como un ÍNDICE: no escribas
+## la historia aquí, solo llama a cada escena en orden. Así:
+##   - ves la estructura completa de un vistazo,
+##   - reordenar escenas es mover una línea,
+##   - puedes probar una escena suelta desde la consola (Shift+O):
+##         jump prologo_espada
+##
+## ¿Dónde está cada cosa?
+##   definiciones/  -> personajes, imágenes, audio, efectos y variables
+##   historia/      -> el guion, un archivo por capítulo
+##
+## `call` salta a una escena y, cuando esa escena hace `return`, vuelve aquí
+## y sigue con la línea siguiente. `jump` salta y NO vuelve.
+## =============================================================================
 
 label start:
 
-    scene black_cuadros
-    narrador_vacio "El reino de Falcon, un reino próspero que se enorgullece de ser uno de los más ricos , prósperos y justos del mundo, está gobernado por el rey Leofric Eldric."
+    ## Prólogo (historia/prologo.rpy)
+    call prologo_leyenda
+    call prologo_balcon
+    call prologo_mensajeros
+    call prologo_espada
 
-    narrador_vacio "El monarca es conocido por portar la sagrada espada Luz de Eternia, un arma mística, el cual se desconoce su origen."
+    ## Capítulo 1 (próximamente, en historia/capitulo_01.rpy)
+    # call capitulo_01_...
 
-    narrador_vacio "Se dice que fue forjada por los mismos Dioses de la antigüedad, según los rumores posee conciencia propia y que únicamente puede ser empuñada por \"el elegido\"."
-
-    scene noche_estrellada_1
-    rey "Esta noche, se siente extrañamente agitada."
-
-    rey "No logro identificar que es lo que me hace sentir esta sensación de intranquilidad, es como si algo se aproximase y no logro identificar que es."
-
-    rey "Las turbulencias del viento solo ayudan a empeorar dicha sensacion, asi como esa extranha tormenta que se aproxima, no, eso no, es algo mas que no logro ver, es como si mi corazón me estuviese alertando de algo."
+    jump fin_de_la_demo
 
 
-    # Muestra una imagen de fondo: Aquí se usa un marcador de posición por
-    # defecto. Es posible añadir un archivo en el directorio 'images' con el
-    # nombre "bg room.png" or "bg room.jpg" para que se muestre aquí.
+label fin_de_la_demo:
 
-    scene bg room
+    scene black with fundido_lento
 
-    # Muestra un personaje: Se usa un marcador de posición. Es posible
-    # reemplazarlo añadiendo un archivo llamado "eileen happy.png" al directorio
-    # 'images'.
+    titulo "Fin del prólogo"
 
-    show eileen happy
+    leyenda "{i}Continuará…{/i}"
 
-    # Presenta las líneas del diálogo.
-
-    e "Has creado un nuevo juego Ren'Py."
-
-    e "Añade una historia, imágenes y música, ¡y puedes presentarlo al mundo!"
-
-    # Finaliza el juego:
-
+    ## Un `return` sin ningún `call` pendiente termina el juego y vuelve al
+    ## menú principal.
     return
